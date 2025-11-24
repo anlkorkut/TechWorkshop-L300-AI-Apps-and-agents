@@ -7,7 +7,7 @@ RUN apt-get update && apt-get upgrade -y && pip install --upgrade pip && rm -rf 
 # Set work directory
 WORKDIR /app
 
-# Install system dependencies (including ODBC for pyodbc, OpenCV, and all common video/image libraries)
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     build-essential unixodbc-dev gcc g++ \
     libgl1 libglib2.0-0 libsm6 libxext6 libxrender1 \
@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Copy .env file into the image (for python-dotenv)
-# COPY .env .env
+COPY .env .env
 
 # Expose the port (default FastAPI/uvicorn port)
 EXPOSE 8000
